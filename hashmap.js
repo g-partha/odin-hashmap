@@ -72,9 +72,47 @@ export class HashMap {
     }
     return false;
   }
-  length() {}
-  clear() {}
-  keys() {}
-  values() {}
-  entries() {}
+  length() {
+    let totalNodes = 0;
+    for (let i = 0; i < this.capacity; i++) {
+      if (this.bucketsList[i]) {
+        totalNodes += this.bucketsList[i].size;
+      }
+    }
+    return totalNodes;
+  }
+  clear() {
+    this.bucketsList = [];
+  }
+  keys() {
+    const keysArray = [];
+    for (let i = 0; i < this.capacity; i++) {
+      if (this.bucketsList[i]) {
+        keysArray.push(...this.bucketsList[i].values());
+      }
+    }
+    return keysArray.map((item) => {
+      return item.keyHM;
+    });
+  }
+  values() {
+    const keysArray = [];
+    for (let i = 0; i < this.capacity; i++) {
+      if (this.bucketsList[i]) {
+        keysArray.push(...this.bucketsList[i].values());
+      }
+    }
+    return keysArray.map((item) => {
+      return item.valueHM;
+    });
+  }
+  entries() {
+    const keysArray = [];
+    for (let i = 0; i < this.capacity; i++) {
+      if (this.bucketsList[i]) {
+        keysArray.push(...this.bucketsList[i].values());
+      }
+    }
+    return keysArray;
+  }
 }

@@ -72,6 +72,16 @@ export class LinkedList {
     }
     return false;
   }
+  values() {
+    let valuesArray = [];
+    if (this.firstNode === null) return "null";
+    let currentNode = this.firstNode;
+    while (currentNode) {
+      valuesArray.push(currentNode.value);
+      currentNode = currentNode.nextNode;
+    }
+    return valuesArray;
+  }
   toString() {
     let string = "";
     if (this.firstNode === null) return "null";
