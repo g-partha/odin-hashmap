@@ -51,8 +51,9 @@ export class HashMap {
     const hashValue = this.hash(keyHM);
     if (!this.bucketsList[hashValue]) return null;
     const indexOfKeyHM = this.bucketsList[hashValue].findIndexOfKeyHM(keyHM);
-    if (indexOfKeyHM !== null)
+    if (indexOfKeyHM !== null) {
       return this.bucketsList[hashValue].at(indexOfKeyHM).value.valueHM;
+    }
     return null;
   }
   has(keyHM) {
@@ -82,37 +83,37 @@ export class HashMap {
     return totalNodes;
   }
   clear() {
-    this.bucketsList = [];
+    this.bucketsList.length = 0;
   }
   keys() {
-    const keysArray = [];
+    const nodesArray = [];
     for (let i = 0; i < this.capacity; i++) {
       if (this.bucketsList[i]) {
-        keysArray.push(...this.bucketsList[i].values());
+        nodesArray.push(...this.bucketsList[i].values());
       }
     }
-    return keysArray.map((item) => {
+    return nodesArray.map((item) => {
       return item.keyHM;
     });
   }
   values() {
-    const keysArray = [];
+    const nodesArray = [];
     for (let i = 0; i < this.capacity; i++) {
       if (this.bucketsList[i]) {
-        keysArray.push(...this.bucketsList[i].values());
+        nodesArray.push(...this.bucketsList[i].values());
       }
     }
-    return keysArray.map((item) => {
+    return nodesArray.map((item) => {
       return item.valueHM;
     });
   }
   entries() {
-    const keysArray = [];
+    const nodesArray = [];
     for (let i = 0; i < this.capacity; i++) {
       if (this.bucketsList[i]) {
-        keysArray.push(...this.bucketsList[i].values());
+        nodesArray.push(...this.bucketsList[i].values());
       }
     }
-    return keysArray;
+    return nodesArray;
   }
 }
