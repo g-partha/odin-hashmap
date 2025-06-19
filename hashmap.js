@@ -36,7 +36,8 @@ export class HashMap {
     }
     return hashCode;
   }
-  set(keyHM, valueHM) {
+
+  newEntry(keyHM, valueHM) {
     const hashValue = this.hash(keyHM);
     if (!this.bucketsList[hashValue]) {
       this.bucketsList[hashValue] = new LinkedListHM();
@@ -46,6 +47,20 @@ export class HashMap {
       return;
     }
     this.bucketsList[hashValue].append(new NodeHM(keyHM, valueHM));
+  }
+  expand() {
+    if ((this.length() + 1) / this.capacity > this.loadFactor) {
+      this.capacity *= 2;
+      const entries = this.entries();
+      this.clear();
+      for(let i = 0; i < entries.length; i++){
+        this.newEntry(entries[i].keyHM, entries[i].valueHM);
+      }
+    }
+  }
+  set(keyHM, valueHM) {
+    this.expand();
+    this.newEntry(keyHM, valueHM);
   }
   get(keyHM) {
     const hashValue = this.hash(keyHM);
